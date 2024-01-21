@@ -1,0 +1,47 @@
+Security Game
+├── ​General Premise
+│   ​├── ​User is a rouge AI navigating through cyberspace
+│   ​└── ​The game takes place as a Turtle on an HTML Canvas
+│   ​    ​└── ​https://hanumanum.github.io/js-turtle/index_en.html
+├── ​Key Stages
+│   ​├── ​The Map
+│   ​│   ​├── ​Loading a Map
+│   ​│   ​│   ​├── ​The map should be loadable from the image
+│   ​│   ​│   ​└── ​When a turtle hits a black pixel (wall) it dies
+│   ​│   ​└── ​Map Specifications
+│   ​│   ​    ​└── ​The map is under fog-of-war
+│   ​├── ​Designing POI
+│   ​│   ​├── ​Placement
+│   ​│   ​│   ​├── ​Player should spawn in a random location
+│   ​│   ​│   ​├── ​Nodes should be placed randomly
+│   ​│   ​│   ​└── ​Security Measures placed Randomly
+│   ​│   ​└── ​Security Measures
+│   ​│   ​    ​├── ​Area-of-denial devices that kill turtles of a certain color that come too close
+│   ​│   ​    ​├── ​Some devices kill all turtles and need to be jumped over by lifting the pen temporarily
+│   ​│   ​    ​├── ​Some devices can be disabled by capturing a nearby node
+│   ​│   ​    ​└── ​Disabling can allow you to simplify your code saving valuable lines
+│   ​├── ​User Submitted Code
+│   ​│   ​├── ​Sanitization
+│   ​│   ​│   ​├── ​We are providing a text box for users to type JS into that is executed
+│   ​│   ​│   ​├── ​!𝗧𝗛𝗜𝗦 𝗜𝗦 𝗗𝗔𝗡𝗚𝗘𝗥𝗢𝗨𝗦!
+│   ​│   ​│   ​└── ​We need to sanitize stuff
+│   ​│   ​│   ​    ​├── ​One idea is using nonsense aliases to map to library functions
+│   ​│   ​│   ​    ​└── ​Another idea is the *𝘉𝘳𝘦𝘯𝘥𝘢𝘯 𝘙𝘦𝘨𝘶𝘭𝘢𝘳 𝘌𝘹𝘱𝘳𝘦𝘴𝘴𝘪𝘰𝘯 𝘍𝘳𝘰𝘮 𝘏𝘦𝘭𝘭 (𝘛𝘔)*
+│   ​│   ​└── ​Limitations (Gameplay)
+│   ​│   ​    ​├── ​The user can only execute N instructions
+│   ​│   ​    ​└── ​Some POI can give more total instruction capacity
+│   ​├── ​Turtles!
+│   ​│   ​└── ​The trails of each previous execution become progressively more transparent with each subsequent execution
+│   ​└── ​Exposure
+│   ​    ​├── ​Activating security devices and capturing POIs can raise expoure
+│   ​    ​└── ​The humans make take actions to make your life difficult as they realize you exist
+└── ​What needs to happen
+    ​├── ​Map importing from image
+    ​├── ​Turtles die when hitting a wall
+    ​├── ​Turtles can claim POIs
+    ​│   ​└── ​Define POI rewards
+    ​├── ​User Submitted Code
+    ​│   ​└── ​Sanitize
+    ​├── ​Security Measures
+    ​└── ​Fog of War
+    ​    ​
