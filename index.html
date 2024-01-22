@@ -7,34 +7,37 @@
         import Turtle from "./turtle.js";
         import { Point } from "./AbstractLib.js";
         import Inturtlepreter from "./inturtlepreter.js";
-        var main = new Turtle("Main_Turtle", new Point(250,250), 0, "turtlecanvas");
+        var main = new Turtle("Main_Turtle", new Point(250,250), 0, "turtle");
         window.main = main;
         var interpret = new Inturtlepreter("input", main);
         window.interpret = interpret;
-        function mainLoop(executee)
-        {
+        //function mainLoop(executee)
+        //{
             //setInterval(function(){main.drawSelf()}, 10);
             //setTimeout(main.reset, 1000);
-        }
-        document.addEventListener('DOMContentLoaded', mainLoop(main));
+        //}
+        //document.addEventListener('DOMContentLoaded', mainLoop(main));
     </script>
   </head>
   <body style="background-color: rgb(33,46,54)">
     <h1 style="color: whitesmoke;">Turtles!</h1>
-    <hr>
+    <hr style="height: 3px; background-color: whitesmoke;">
+
     <div style="display: grid; grid-template-columns: 1fr 1fr;">
-      <div style="max-width: 45vw;">
-        <canvas id="turtlecanvas" width="2000" height="2000" style="background-color: black; border: solid 4px whitesmoke; width: 100%; aspect-ratio: 1/1;"></canvas>
+      <div style="position: relative; max-width: 45vw; aspect-ratio: 1/1;">
+        <canvas id="turtle" width="2000" height="2000" style="z-index: 1;position: absolute; top: 0; left: 0; background-color: black; border: solid 4px whitesmoke; width: 100%; aspect-ratio: 1/1;"></canvas>
+        <canvas id="fog" width="2000" height="2000" style="opacity: 1.0; z-index: 2; position: absolute; top: 0; left: 0; background-color: rgba(0,0,0,0); border: solid 4px whitesmoke; width: 100%; aspect-ratio: 1/1;"></canvas>
+        <canvas id="save" width="2000" height="2000" style="display: none;"></canvas>
       </div>
-      <div style="max-width: 45vw;">
+      <div style="position: relative; max-width: 45vw; aspect-ratio: 1/1;">
         <textarea id="input" style="font-size: 24px; background-color: rgb(67, 72, 91); height: 80%; width: 100%; border: solid 4px black; resize: none; color: whitesmoke;"></textarea>
         <button style="height: 15%; width: 100%; font-size: 24px;" onclick="window.interpret.execution()">EXECUTE</button>
       </div>
     </div>
 
-    <canvas id="mapProcessor" width="2000" height="2000" style="display: none;"></canvas>
-
-    <hr>
+    <pre>
+    </pre>
+    <hr style="height: 3px; background-color: whitesmoke;">
 <i style="color: whitesmoke; font-size: 26px;">A program written by Brendan Rood, Connor Hagen, and Jet Li in Spring 2024 for CS-5732 @ University of Minnesota Duluth</i>
 
     <script>

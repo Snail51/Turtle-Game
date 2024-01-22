@@ -1,5 +1,3 @@
-import { Sleep } from "./AbstractLib.js";
-
 export default class Inturtlepreter
 {
     constructor(commandSource, turtle)
@@ -21,6 +19,7 @@ export default class Inturtlepreter
             var shouldContinue = await this.parseLine(line);
             if(!shouldContinue)
             {
+                alert("You hit a wall and died!");
                 return;
             }
         }
@@ -61,23 +60,5 @@ export default class Inturtlepreter
             this.turtle.drawSelf();
             return true;
         }
-    }
-
-    async getDeathMap()
-    {
-        var raw = this.turtle.drawcontext.getImageData(0, 0, 2000, 2000).data;
-        var pixels = new Array();
-        //for(var i = 0; i < raw.length; i+=4)
-        //{
-        //    var pixel = ({
-        //        red: raw[i],
-        //        green: raw[i+1],
-        //        blue: raw[i+2],
-        //        alpha: raw[i+3]
-        //    });
-        //    console.log("built pixel " + i)
-        //    pixels.push(pixel);
-        //}
-        return pixels;
     }
 }

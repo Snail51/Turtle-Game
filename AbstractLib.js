@@ -285,7 +285,7 @@ export class ImageProcessor
     {
         this.src = new Image();
         this.src.src = src;
-        this.drawcontext = document.getElementById(canvas).getContext("2d");;
+        this.drawcontext = document.getElementById(canvas).getContext("2d");
     }
 
     getPixel(point)

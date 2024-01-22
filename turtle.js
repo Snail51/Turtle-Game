@@ -14,9 +14,14 @@ export default class Turtle
         this.map = new Image();
         this.map.src = "./Resources/map.bmp";
 
+        this.reveal = new RevealMap("fog");
+
         var canvas = document.getElementById(canvas);
         var context = canvas.getContext("2d");
         this.drawcontext = context;
+
+        console.log(this);
+
     }
 
     reset()
@@ -53,6 +58,13 @@ export default class Turtle
         this.drawcontext.beginPath();
         this.drawcontext.arc(this.position.x, this.position.y, 20, 0, 2 * Math.PI);
         this.drawcontext.fill();
+
+        this.reveal.drawcontext.beginPath();
+        this.reveal.drawcontext.save();
+        this.reveal.drawcontext.arc(this.position.x, this.position.y, 250, 0, 2 * Math.PI);
+        this.reveal.drawcontext.clip();
+        this.reveal.drawcontext.clearRect(0, 0, 2000, 2000);
+        this.reveal.drawcontext.restore();
     }
 
     async north(amount)
@@ -149,7 +161,7 @@ export default class Turtle
 
     collide()
     {
-        var process = new ImageProcessor("./Resources/map.bmp", "mapProcessor");
+        var process = new ImageProcessor("./Resources/map.bmp", "save");
         var mapColor = process.getPixel(this.position);
         if(mapColor.red <= 15 && mapColor.green <= 15 && mapColor.blue <= 15)
         {
@@ -159,5 +171,38 @@ export default class Turtle
         {
             return false;
         }
+    }
+}
+
+class RevealMap
+{
+    constructor(canvas)
+    {
+        this.drawcontext = document.getElementById(canvas).getContext("2d");
+        this.drawcontext.beginPath();
+        this.drawcontext.fillStyle = "black";
+        this.drawcontext.fillRect(0,0,2000,2000);
+        this.drawcontext.beginPath();
+    }
+
+    addPoint(point)
+    {
+        var shouldAdd = !(this.isThisInSet(point, this.points));
+        if(shouldAdd)
+        {
+            this.points.push(point);
+        }
+    }
+
+    isThisInSet(obj, set)
+    {
+        for(var item of set)
+        {
+            if(obj == item)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
