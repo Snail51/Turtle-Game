@@ -19,16 +19,23 @@
     </script>
   </head>
   <body style="background-color: rgb(33,46,54)">
-    <h1 style="color: whitesmoke">Turtles!</h1>
-    <div style="display: flex; width: 95vw; height: 90vh">
-      <div style="display: flex; flex-direction: column; width: 60%; height: 85%">
-         <canvas id="turtlecanvas" width="2000" height="2000" style="background-color: black; border: solid 4px whitesmoke; width: 95%; height: 100%;"></canvas>
+    <h1 style="color: whitesmoke;">Turtles!</h1>
+    <hr>
+    <div style="display: grid; grid-template-columns: 1fr 1fr;">
+      <div style="max-width: 45vw;">
+        <canvas id="turtlecanvas" width="2000" height="2000" style="background-color: black; border: solid 4px whitesmoke; width: 100%; aspect-ratio: 1/1;"></canvas>
       </div>
-      <div style="display: flex; flex-direction: column; width: 40%; height: 85%; justify-content: space-between;">
-         <textarea id="input" style="background-color: rgb(67, 72, 91); height: 80%; border: solid 4px black; resize: none; color: whitesmoke;"></textarea>
-         <button style="height: 15%" onclick="window.interpret.execution()">EXECUTE</button>
+      <div style="max-width: 45vw;">
+        <textarea id="input" style="font-size: 24px; background-color: rgb(67, 72, 91); height: 80%; width: 100%; border: solid 4px black; resize: none; color: whitesmoke;"></textarea>
+        <button style="height: 15%; width: 100%; font-size: 24px;" onclick="window.interpret.execution()">EXECUTE</button>
       </div>
     </div>
 
+    <hr>
+<i style="color: whitesmoke; font-size: 26px;">A program written by Brendan Rood, Connor Hagen, and Jet Li in Spring 2024 for CS-5732 @ University of Minnesota</i>
+
+    <script>
+      document.getElementById("input").innerHTML = "color(red)\nsouth(500)\neast(300)\ncolor(blue)\neast(250)\neast(500)\nnorth(300)\neast(200)\nsouth(700)\ncolor(green)\nwest(1000)\nsouth(200)\neast(1200)\nnorth(500)\neast(200)\ncolor(cyan)\nsouth(750)\nwest(1000)";
+    </script>
   </body>
 </html>
