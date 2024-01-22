@@ -1,4 +1,4 @@
-import { Point, Color } from "./AbstractLib";
+import { Point, Color, Sleep, ImageProcessor } from "./AbstractLib";
 
 export default class Turtle
 {
@@ -9,6 +9,7 @@ export default class Turtle
         this.rotation = rotation;
         this.color = "red";
         this.origin = new Point(center.x, center.y);
+        this.sleepLength = 10;
 
         this.map = new Image();
         this.map.src = "./Resources/map.bmp";
@@ -54,75 +55,109 @@ export default class Turtle
         this.drawcontext.fill();
     }
 
-    north(amount)
+    async north(amount)
     {
         //prepre for drawing
         this.drawcontext.lineWidth = 15;
         this.drawcontext.strokeStyle = this.color;
         this.drawcontext.beginPath();
-        var delta = new Point(0, -1 * amount);
+        var delta = new Point(0, -1);
 
         //draw!
-        this.drawcontext.moveTo(this.position.x, this.position.y);
-        this.drawcontext.lineTo(this.position.x + delta.x, this.position.y + delta.y);
-        this.drawcontext.stroke();
-        this.position = Point.add(this.position, delta);
+        for(var i = 0; i < amount; i++)
+        {
+            this.position = Point.add(this.position, delta);
+            if(this.collide())
+            {
+                return false;
+            }
+            this.drawSelf();
+            await Sleep.sleep(this.sleepLength);
+        }
 
-        //make a node
-        this.drawSelf();
+        return true; //execute the next command in the sequence
     }
 
-    south(amount)
+    async south(amount)
     {
         //prepre for drawing
         this.drawcontext.lineWidth = 15;
         this.drawcontext.strokeStyle = this.color;
         this.drawcontext.beginPath();
-        var delta = new Point(0, 1 * amount);
+        var delta = new Point(0, 1);
 
         //draw!
-        this.drawcontext.moveTo(this.position.x, this.position.y);
-        this.drawcontext.lineTo(this.position.x + delta.x, this.position.y + delta.y);
-        this.drawcontext.stroke();
-        this.position = Point.add(this.position, delta);
+        for(var i = 0; i < amount; i++)
+        {
+            this.position = Point.add(this.position, delta);
+            if(this.collide())
+            {
+                return false;
+            }
+            this.drawSelf();
+            await Sleep.sleep(this.sleepLength);
+        }
 
-        //make a node
-        this.drawSelf();
+        return true; //execute the next command in the sequence
     }
 
-    east(amount)
+    async east(amount)
     {
         //prepre for drawing
         this.drawcontext.lineWidth = 15;
         this.drawcontext.strokeStyle = this.color;
         this.drawcontext.beginPath();
-        var delta = new Point(1 * amount, 0);
+        var delta = new Point(1, 0);
 
         //draw!
-        this.drawcontext.moveTo(this.position.x, this.position.y);
-        this.drawcontext.lineTo(this.position.x + delta.x, this.position.y + delta.y);
-        this.drawcontext.stroke();
-        this.position = Point.add(this.position, delta);
+        for(var i = 0; i < amount; i++)
+        {
+            this.position = Point.add(this.position, delta);
+            if(this.collide())
+            {
+                return false;
+            }
+            this.drawSelf();
+            await Sleep.sleep(this.sleepLength);
+        }
 
-        //make a node
-        this.drawSelf();
+        return true; //execute the next command in the sequence
     }
 
-    west(amount)
+    async west(amount)
     {
         //prepre for drawing
         this.drawcontext.lineWidth = 15;
         this.drawcontext.strokeStyle = this.color;
         this.drawcontext.beginPath();
-        var delta = new Point(-1 * amount, 0);
+        var delta = new Point(-1, 0);
 
         //draw!
-        this.drawcontext.moveTo(this.position.x, this.position.y);
-        this.drawcontext.lineTo(this.position.x + delta.x, this.position.y + delta.y);
-        this.drawcontext.stroke();
-        this.position = Point.add(this.position, delta);
+        for(var i = 0; i < amount; i++)
+        {
+            this.position = Point.add(this.position, delta);
+            if(this.collide())
+            {
+                return false;
+            }
+            this.drawSelf();
+            await Sleep.sleep(this.sleepLength);
+        }
 
-        //make a node
-        this.drawSelf();
+        return true; //execute the next command in the sequence
+    }
+
+    collide()
+    {
+        var process = new ImageProcessor("./Resources/map.bmp", "mapProcessor");
+        var mapColor = process.getPixel(this.position);
+        if(mapColor.red <= 15 && mapColor.green <= 15 && mapColor.blue <= 15)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

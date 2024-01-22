@@ -265,3 +265,38 @@ export class Color
         });
     }
 }
+
+export class Sleep
+{
+    constructor()
+    {
+        //you shouldn't be instantiating this
+    }
+
+    static sleep(ms)
+    {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+}
+
+export class ImageProcessor
+{
+    constructor(src, canvas)
+    {
+        this.src = new Image();
+        this.src.src = src;
+        this.drawcontext = document.getElementById(canvas).getContext("2d");;
+    }
+
+    getPixel(point)
+    {
+        this.drawcontext.drawImage(this.src, 0, 0);
+        var pixel = this.drawcontext.getImageData(point.x, point.y, 1, 1).data;
+        return({
+            red: pixel[0],
+            green: pixel[1],
+            blue: pixel[2],
+            name: Color.getColorName(pixel[0], pixel[1], pixel[2])
+        });
+    }
+}
