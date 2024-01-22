@@ -35,23 +35,23 @@ export default class Turtle
 
     getColorUnderMe()
     {
-        var data = this.canvasStack.layer(1).getImageData(this.position.x, this.position.y, 1, 1).data;
-
-        return({
-            red: data[0],
-            green: data[1],
-            blue: data[2],
-            name: Color.getColorName(data[0], data[1], data[2])
-        });
+        return this.canvasStack.getPixel(this.position);
     }
 
     drawSelf()
     {
+        //draw the turtle
         this.canvasStack.layer(3).fillStyle = this.color;
         this.canvasStack.layer(3).beginPath();
         this.canvasStack.layer(3).arc(this.position.x, this.position.y, 20, 0, 2 * Math.PI);
         this.canvasStack.layer(3).fill();
 
+        //remove a radius of fog around the turtle
+        this.cutoutFog();
+    }
+
+    cutoutFog()
+    {
         this.canvasStack.layer(4).beginPath();
         this.canvasStack.layer(4).save();
         this.canvasStack.layer(4).arc(this.position.x, this.position.y, 250, 0, 2 * Math.PI);

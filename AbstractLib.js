@@ -10,10 +10,11 @@ export class Point
         return new Point(null,null);
     }
 
-    constructor(x, y)
+    constructor(x, y, z=null)
     {
         this.x = x;
         this.y = y;
+        this.z = z;
     }
 
     invert() //convert (+1,+1) to (-1,-1)

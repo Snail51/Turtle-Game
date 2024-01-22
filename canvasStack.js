@@ -62,9 +62,9 @@ export class CanvasStack
      * `blue`, and `alpha`. These properties represent the color values of the pixel at coordinates
      * `(x, y)` in the specified layer `z`.
      */
-    getPixel(x, y, z)
+    getPixel(tripoint)
     {
-        var data = this.canvasStack.layer(z).getImageData(x, y, 1, 1).data;
+        var data = this.canvasStack.layer(tripoint.z).getImageData(tripoint.x, tripoint.y, 1, 1).data;
 
         return({
             red: data[0],
