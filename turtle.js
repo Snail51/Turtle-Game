@@ -10,10 +10,12 @@ export default class Turtle
         this.color = "red";
         this.origin = new Point(center.x, center.y);
 
+        this.map = new Image();
+        this.map.src = "./Resources/map.bmp";
+
         var canvas = document.getElementById(canvas);
         var context = canvas.getContext("2d");
         this.drawcontext = context;
-
     }
 
     reset()
@@ -23,6 +25,8 @@ export default class Turtle
         this.drawcontext.clearRect(0, 0, this.drawcontext.canvas.width, this.drawcontext.canvas.height);
         this.drawcontext.fillStyle = "black";
         this.drawcontext.fillRect(0, 0, this.drawcontext.canvas.width, this.drawcontext.canvas.height); //add an outline
+
+        this.drawcontext.drawImage(this.map, 0, 0);
     }
 
     setColor(colorName)

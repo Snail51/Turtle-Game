@@ -10,6 +10,7 @@ export default class Inturtlepreter
     async execution()
     {
         this.turtle.reset();
+
         this.turtle.drawSelf();
         this.commands = this.source.value.split("\n");
         console.log(this);
