@@ -6,8 +6,11 @@
     <script type="module">
         import Turtle from "./turtle.js";
         import { Point } from "./AbstractLib.js";
+        import Inturtlepreter from "./inturtlepreter.js";
         var main = new Turtle("Main_Turtle", new Point(100,100), 0, "turtlecanvas");
         window.main = main;
+        var interpret = new Inturtlepreter("input", main);
+        window.interpret = interpret;
         function mainLoop(executee)
         {
             //setInterval(function(){main.drawSelf()}, 10);
@@ -23,29 +26,9 @@
       </div>
       <div style="display: flex; flex-direction: column; width: 40%; height: 85%; justify-content: space-between;">
          <textarea id="input" style="background-color: rgb(67, 72, 91); height: 80%; border: solid 4px black; resize: none; color: whitesmoke;"></textarea>
-         <button style="height: 15%" onclick="dummy()">EXECUTE</button>
+         <button style="height: 15%" onclick="window.interpret.execution()">EXECUTE</button>
       </div>
     </div>
-    
-    <script>
-      function dummy()
-      {
-        alert("EXECUTION FUCNTION");
-      }
 
-      function getCanvasDrawCoordinates(canvas, event) {
-      const rect = canvas.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
-      return {x: x, y: y};
-      }
-
-      const canvas = document.getElementById('turtlecanvas');
-      canvas.addEventListener('click', function(event) {
-      const coordinates = getCanvasDrawCoordinates(canvas, event);
-      console.log(`Clicked at (${coordinates.x}, ${coordinates.y})`);
-      });
-
-    </script>
   </body>
 </html>

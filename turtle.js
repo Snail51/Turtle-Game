@@ -8,6 +8,7 @@ export default class Turtle
         this.position = center;
         this.rotation = rotation;
         this.color = "red";
+        this.origin = new Point(center.x, center.y);
 
         var canvas = document.getElementById(canvas);
         var context = canvas.getContext("2d");
@@ -17,7 +18,11 @@ export default class Turtle
 
     reset()
     {
-        this.position = Point.zero();
+        this.position = this.origin;
+        this.drawcontext.beginPath();
+        this.drawcontext.clearRect(0, 0, this.drawcontext.canvas.width, this.drawcontext.canvas.height);
+        this.drawcontext.fillStyle = "black";
+        this.drawcontext.fillRect(0, 0, this.drawcontext.canvas.width, this.drawcontext.canvas.height); //add an outline
     }
 
     setColor(colorName)
@@ -40,6 +45,7 @@ export default class Turtle
     drawSelf()
     {
         this.drawcontext.fillStyle = this.color;
+        this.drawcontext.beginPath();
         this.drawcontext.arc(this.position.x, this.position.y, 40, 0, 2 * Math.PI);
         this.drawcontext.fill();
     }
