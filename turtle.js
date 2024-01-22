@@ -2,23 +2,18 @@ import { Point, Color, Sleep, ImageProcessor } from "./AbstractLib";
 
 export default class Turtle
 {
-    constructor(name, center, rotation, canvas)
+    constructor(name, center, rotation, canvasStack)
     {
         this.name = name;
         this.position = center;
         this.rotation = rotation;
         this.color = "red";
         this.origin = new Point(center.x, center.y);
+        this.canvasStack = canvasStack;
         this.sleepLength = 10;
 
         this.map = new Image();
         this.map.src = "./Resources/map.bmp";
-
-        this.reveal = document.getElementById("fog").getContext("2d");
-
-        var canvas = document.getElementById(canvas);
-        var context = canvas.getContext("2d");
-        this.drawcontext = context;
 
         console.log(this);
 
@@ -27,12 +22,10 @@ export default class Turtle
     reset()
     {
         this.position = this.origin;
-        this.drawcontext.beginPath();
-        this.drawcontext.clearRect(0, 0, this.drawcontext.canvas.width, this.drawcontext.canvas.height);
-        this.drawcontext.fillStyle = "black";
-        this.drawcontext.fillRect(0, 0, this.drawcontext.canvas.width, this.drawcontext.canvas.height); //add an outline
+        this.canvasStack.layer(3).beginPath();
+        this.canvasStack.layer(3).clearRect(0, 0, this.canvasStack.layer(3).canvas.width, this.canvasStack.layer(3).canvas.height);
 
-        this.drawcontext.drawImage(this.map, 0, 0);
+        this.canvasStack.layer(1).drawImage(this.map, 0, 0);
     }
 
     setColor(colorName)
@@ -42,7 +35,7 @@ export default class Turtle
 
     getColorUnderMe()
     {
-        var data = this.drawcontext.getImageData(this.position.x, this.position.y, 1, 1).data;
+        var data = this.canvasStack.layer(1).getImageData(this.position.x, this.position.y, 1, 1).data;
 
         return({
             red: data[0],
@@ -54,25 +47,25 @@ export default class Turtle
 
     drawSelf()
     {
-        this.drawcontext.fillStyle = this.color;
-        this.drawcontext.beginPath();
-        this.drawcontext.arc(this.position.x, this.position.y, 20, 0, 2 * Math.PI);
-        this.drawcontext.fill();
+        this.canvasStack.layer(3).fillStyle = this.color;
+        this.canvasStack.layer(3).beginPath();
+        this.canvasStack.layer(3).arc(this.position.x, this.position.y, 20, 0, 2 * Math.PI);
+        this.canvasStack.layer(3).fill();
 
-        this.reveal.beginPath();
-        this.reveal.save();
-        this.reveal.arc(this.position.x, this.position.y, 250, 0, 2 * Math.PI);
-        this.reveal.clip();
-        this.reveal.clearRect(0, 0, 2000, 2000);
-        this.reveal.restore();
+        this.canvasStack.layer(4).beginPath();
+        this.canvasStack.layer(4).save();
+        this.canvasStack.layer(4).arc(this.position.x, this.position.y, 250, 0, 2 * Math.PI);
+        this.canvasStack.layer(4).clip();
+        this.canvasStack.layer(4).clearRect(0, 0, 2000, 2000);
+        this.canvasStack.layer(4).restore();
     }
 
     async north(amount)
     {
         //prepre for drawing
-        this.drawcontext.lineWidth = 15;
-        this.drawcontext.strokeStyle = this.color;
-        this.drawcontext.beginPath();
+        this.canvasStack.layer(3).lineWidth = 15;
+        this.canvasStack.layer(3).strokeStyle = this.color;
+        this.canvasStack.layer(3).beginPath();
         var delta = new Point(0, -1);
 
         //draw!
@@ -93,9 +86,9 @@ export default class Turtle
     async south(amount)
     {
         //prepre for drawing
-        this.drawcontext.lineWidth = 15;
-        this.drawcontext.strokeStyle = this.color;
-        this.drawcontext.beginPath();
+        this.canvasStack.layer(3).lineWidth = 15;
+        this.canvasStack.layer(3).strokeStyle = this.color;
+        this.canvasStack.layer(3).beginPath();
         var delta = new Point(0, 1);
 
         //draw!
@@ -116,9 +109,9 @@ export default class Turtle
     async east(amount)
     {
         //prepre for drawing
-        this.drawcontext.lineWidth = 15;
-        this.drawcontext.strokeStyle = this.color;
-        this.drawcontext.beginPath();
+        this.canvasStack.layer(3).lineWidth = 15;
+        this.canvasStack.layer(3).strokeStyle = this.color;
+        this.canvasStack.layer(3).beginPath();
         var delta = new Point(1, 0);
 
         //draw!
@@ -139,9 +132,9 @@ export default class Turtle
     async west(amount)
     {
         //prepre for drawing
-        this.drawcontext.lineWidth = 15;
-        this.drawcontext.strokeStyle = this.color;
-        this.drawcontext.beginPath();
+        this.canvasStack.layer(3).lineWidth = 15;
+        this.canvasStack.layer(3).strokeStyle = this.color;
+        this.canvasStack.layer(3).beginPath();
         var delta = new Point(-1, 0);
 
         //draw!
@@ -161,7 +154,7 @@ export default class Turtle
 
     collide()
     {
-        var process = new ImageProcessor("./Resources/map.bmp", "save");
+        var process = new ImageProcessor("./Resources/map.bmp", "map");
         var mapColor = process.getPixel(this.position);
         if(mapColor.red <= 15 && mapColor.green <= 15 && mapColor.blue <= 15)
         {
