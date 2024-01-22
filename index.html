@@ -11,12 +11,16 @@
         window.main = main;
         var interpret = new Inturtlepreter("input", main);
         window.interpret = interpret;
-        //function mainLoop(executee)
-        //{
+        function mainLoop(executee)
+        {
             //setInterval(function(){main.drawSelf()}, 10);
-            //setTimeout(main.reset, 1000);
-        //}
-        //document.addEventListener('DOMContentLoaded', mainLoop(main));
+            setTimeout(forceMap, 1000);
+            function forceMap()
+            {
+              document.getElementById("execution").click();
+            }
+        }
+        document.addEventListener('DOMContentLoaded', mainLoop(main));
     </script>
   </head>
   <body style="background-color: rgb(33,46,54)">
@@ -31,7 +35,7 @@
       </div>
       <div style="position: relative; max-width: 45vw; aspect-ratio: 1/1;">
         <textarea id="input" style="font-size: 24px; background-color: rgb(67, 72, 91); height: 80%; width: 100%; border: solid 4px black; resize: none; color: whitesmoke;"></textarea>
-        <button style="height: 15%; width: 100%; font-size: 24px;" onclick="window.interpret.execution()">EXECUTE</button>
+        <button id="execution" style="height: 15%; width: 100%; font-size: 24px;" onclick="window.interpret.execution()">EXECUTE</button>
       </div>
     </div>
 

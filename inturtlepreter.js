@@ -60,5 +60,6 @@ export default class Inturtlepreter
             this.turtle.drawSelf();
             return true;
         }
+        return true;
     }
 }
