@@ -50,7 +50,7 @@ export default class Turtle
     {
         this.drawcontext.fillStyle = this.color;
         this.drawcontext.beginPath();
-        this.drawcontext.arc(this.position.x, this.position.y, 40, 0, 2 * Math.PI);
+        this.drawcontext.arc(this.position.x, this.position.y, 20, 0, 2 * Math.PI);
         this.drawcontext.fill();
     }
 
