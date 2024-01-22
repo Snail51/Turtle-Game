@@ -7,6 +7,11 @@ export default class Inturtlepreter
         this.turtle = turtle;
     }
 
+    /**
+     * The function executes a series of commands, parsing each line and stopping if the turtle hits a
+     * wall. This is the main function executed by the HTML button element.
+     * @returns nothing (undefined).
+     */
     async execution()
     {
         this.turtle.reset();
@@ -25,6 +30,13 @@ export default class Inturtlepreter
         }
     }
 
+    /**
+     * The function `parseLine` is a JavaScript async function that takes a line of input and parses it
+     * to execute turtle movements or change the turtle's color.
+     * @param line - The `line` parameter is a string that represents a command or instruction for the
+     * turtle.
+     * @returns The function `parseLine` returns a boolean value.
+     */
     async parseLine(line)
     {
         var north = new RegExp("north\\(([0-9]*)\\)");

@@ -1,3 +1,5 @@
+/* The Point class represents a point in a 2D or 3D coordinate system and provides various methods for
+manipulating and calculating distances between points. */
 export class Point
 {
     static zero() //(0,0)
@@ -63,6 +65,7 @@ export class Point
     }
 }
 
+/* The OrderedPair class represents a key-value pair in JavaScript. */
 export class OrderedPair
 {
     constructor(key, value)
@@ -72,6 +75,8 @@ export class OrderedPair
     }
 }
 
+/* The AbstractRectangle class represents a rectangle shape with various methods for manipulating and
+checking points inside the rectangle. */
 export class AbstractRectangle
 {
     constructor(width, height)
@@ -149,6 +154,8 @@ export class AbstractRectangle
     }
 }
 
+/* The Color class in JavaScript represents a color with red, green, and blue values, and provides
+methods for getting the name of a color based on its RGB values. */
 export class Color
 {
     constructor(red, green, blue)
@@ -267,6 +274,8 @@ export class Color
     }
 }
 
+/* The Sleep class provides a static method to pause the execution of code for a specified number of
+milliseconds. */
 export class Sleep
 {
     constructor()
@@ -280,6 +289,8 @@ export class Sleep
     }
 }
 
+/* The ImageProcessor class in JavaScript allows you to get the pixel information and color name of a
+specific point in an image. */
 export class ImageProcessor
 {
     constructor(src, canvas)

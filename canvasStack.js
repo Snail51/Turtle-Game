@@ -1,3 +1,5 @@
+/* The `CanvasStack` class is a JavaScript class that represents a stack of canvas layers and provides
+methods to access and manipulate the pixels in those layers. */
 export class CanvasStack
 {
     constructor(canvasIdArray)
