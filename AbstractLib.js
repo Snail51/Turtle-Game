@@ -12,7 +12,7 @@ export class Point
         return new Point(null,null);
     }
 
-    constructor(x, y, z=null)
+    constructor(x, y, z=0)
     {
         this.x = x;
         this.y = y;
@@ -38,9 +38,17 @@ export class Point
 
     static add(pointA, pointB) //add two points (x1+x2,y1+y2)
     {
-        var newX = pointA.x + pointB.x;
-        var newY = pointA.y + pointB.y;
-        return(new Point(newX,  newY));
+        var ax = pointA.x;
+        var ay = pointA.y;
+        var az = pointA.z;
+        var bx = pointB.x;
+        var by = pointB.y;
+        var bz = pointB.z;
+
+        var newX = ax + bx;
+        var newY = ay + by;
+        var newZ = az + bz;
+        return(new Point(newX, newY, newZ));
     }
 
     toString()

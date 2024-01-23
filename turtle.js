@@ -8,9 +8,10 @@ export default class Turtle
         this.position = center;
         this.rotation = rotation;
         this.color = "red";
-        this.origin = new Point(center.x, center.y);
+        this.origin = center;
         this.canvasStack = canvasStack;
-        this.sleepLength = 10;
+        this.sleepLength = 50;
+        this.moveSpeed = 10;
 
         this.map = new Image();
         this.map.src = "./Resources/map.bmp";
@@ -96,10 +97,10 @@ export default class Turtle
         this.canvasStack.layer(3).lineWidth = 15;
         this.canvasStack.layer(3).strokeStyle = this.color;
         this.canvasStack.layer(3).beginPath();
-        var delta = new Point(0, -1);
+        var delta = new Point(0, -1 * this.moveSpeed);
 
         //draw!
-        for(var i = 0; i < amount; i++)
+        for(var i = 0; i < amount; i+=this.moveSpeed)
         {
             this.position = Point.add(this.position, delta);
             if(this.collide())
@@ -127,10 +128,10 @@ export default class Turtle
         this.canvasStack.layer(3).lineWidth = 15;
         this.canvasStack.layer(3).strokeStyle = this.color;
         this.canvasStack.layer(3).beginPath();
-        var delta = new Point(0, 1);
+        var delta = new Point(0, this.moveSpeed);
 
         //draw!
-        for(var i = 0; i < amount; i++)
+        for(var i = 0; i < amount; i+=this.moveSpeed)
         {
             this.position = Point.add(this.position, delta);
             if(this.collide())
@@ -158,10 +159,10 @@ export default class Turtle
         this.canvasStack.layer(3).lineWidth = 15;
         this.canvasStack.layer(3).strokeStyle = this.color;
         this.canvasStack.layer(3).beginPath();
-        var delta = new Point(1, 0);
+        var delta = new Point(this.moveSpeed, 0);
 
         //draw!
-        for(var i = 0; i < amount; i++)
+        for(var i = 0; i < amount; i+=this.moveSpeed)
         {
             this.position = Point.add(this.position, delta);
             if(this.collide())
@@ -189,10 +190,10 @@ export default class Turtle
         this.canvasStack.layer(3).lineWidth = 15;
         this.canvasStack.layer(3).strokeStyle = this.color;
         this.canvasStack.layer(3).beginPath();
-        var delta = new Point(-1, 0);
+        var delta = new Point(-1 * this.moveSpeed, 0);
 
         //draw!
-        for(var i = 0; i < amount; i++)
+        for(var i = 0; i < amount; i+=this.moveSpeed)
         {
             this.position = Point.add(this.position, delta);
             if(this.collide())
@@ -215,7 +216,8 @@ export default class Turtle
      */
     collide()
     {
-        var mapColor = this.canvasStack.getPixel(this.position);
+        var search = new Point(this.position.x, this.position.y, 1);
+        var mapColor = this.canvasStack.getPixel(search);
         if(mapColor.red <= 15 && mapColor.green <= 15 && mapColor.blue <= 15)
         {
             return true;

@@ -66,7 +66,11 @@ export class CanvasStack
      */
     getPixel(tripoint)
     {
-        var data = this.canvasStack.layer(tripoint.z).getImageData(tripoint.x, tripoint.y, 1, 1).data;
+        //console.log(this.layer(tripoint.z));
+        //console.log(this.layer(tripoint.z).getImageData(tripoint.x, tripoint.y, 1, 1));
+        //console.log(this.layer(tripoint.z).getImageData(tripoint.x, tripoint.y, 1, 1).data);
+        var data = this.layer(tripoint.z).getImageData(tripoint.x, tripoint.y, 1, 1);
+        data = data.data;
 
         return({
             red: data[0],
