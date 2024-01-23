@@ -39,11 +39,11 @@ export default class Inturtlepreter
      */
     async parseLine(line)
     {
-        var north = new RegExp("north\\(([0-9]*)\\)");
-        var south = new RegExp("south\\(([0-9]*)\\)");
-        var east = new RegExp("east\\(([0-9]*)\\)");
-        var west = new RegExp("west\\(([0-9]*)\\)");
-        var color = new RegExp("color\\(([a-zA-Z]*)\\)");
+        var north = new RegExp("^\s*(?:[nN][oO][rR][tT][hH]|[nN])[\\(\\ ]*([0-9]*)[\\)\\ ]*", "m");
+        var south = new RegExp("^\s*(?:[sS][oO][uU][tT][hH]|[sS])[\\(\\ ]*([0-9]*)[\\)\\ ]*", "m");
+        var east = new RegExp("^\s*(?:[eE][aA][sS][tT]|[eE])[\\(\\ ]*([0-9]*)[\\)\\ ]*", "m");
+        var west = new RegExp("^\s*(?:[wW][eE][sS][tT]|[wW])[\\(\\ ]*([0-9]*)[\\)\\ ]*", "m");
+        var color = new RegExp("^\s*(?:[cC][oO][lL][oO][rR]|[cC])[\\(\\ ]*([a-zA-Z]*)[\\)\\ ]*", "m");
 
         var match = north.exec(line);
         if(match != null)
