@@ -36,17 +36,23 @@ export class CanvasStack
                 return this.layers[1];
             case 2:
             case "2":
-            case "poi":
+            case "detail":
+            case "details":
                 return this.layers[2];
             case 3:
             case "3":
-            case "turtle":
+            case "poi":
                 return this.layers[3];
             case 4:
             case "4":
-            case "fog":
+            case "turtle":
                 return this.layers[4];
+            case 5:
+            case "5":
+            case "fog":
+                return this.layers[5];
             default:
+                console.error("tried to get a canvas layer from unkown key \"" + key + "\"! returning null.");
                 return null;
         }
     }

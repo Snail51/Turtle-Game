@@ -1,4 +1,4 @@
-import { Point, Color, Sleep, ImageProcessor } from "./AbstractLib";
+import { Point, Color, Sleep, ImageProcessor } from "./AbstractLib.js";
 
 export default class Turtle
 {
@@ -11,10 +11,14 @@ export default class Turtle
         this.origin = center;
         this.canvasStack = canvasStack;
         this.sleepLength = 50;
-        this.moveSpeed = 10;
+        this.moveSpeed = 1;
 
         this.map = new Image();
-        this.map.src = "./Resources/map.bmp";
+        this.map.src = "./Resources/map4_walls.png";
+        this.details = new Image();
+        this.details.src = "./Resources/map4_details.png";
+        this.poi = new Image();
+        this.poi.src = "./Resources/map4_poi.png";
 
         console.log(this);
 
@@ -27,10 +31,16 @@ export default class Turtle
     reset()
     {
         this.position = this.origin;
-        this.canvasStack.layer(3).beginPath();
-        this.canvasStack.layer(3).clearRect(0, 0, this.canvasStack.layer(3).canvas.width, this.canvasStack.layer(3).canvas.height);
+        this.canvasStack.layer("turtle").beginPath();
+        this.canvasStack.layer("turtle").clearRect(0, 0, this.canvasStack.layer("turtle").canvas.width, this.canvasStack.layer("turtle").canvas.height);
 
-        this.canvasStack.layer(1).drawImage(this.map, 0, 0);
+        this.canvasStack.layer("map").drawImage(this.map, 0, 0);
+        this.canvasStack.layer("details").drawImage(this.details, 0, 0);
+        this.canvasStack.layer("poi").drawImage(this.map, 0, 0);
+
+        //do image processing;
+        // details - black pixels replaced with transparent, white pixels replaced with grey
+        // poi - black pixels replaced with transparent, white pixels replaced with magenta
     }
 
     /**
@@ -59,10 +69,10 @@ export default class Turtle
     drawSelf()
     {
         //draw the turtle
-        this.canvasStack.layer(3).fillStyle = this.color;
-        this.canvasStack.layer(3).beginPath();
-        this.canvasStack.layer(3).arc(this.position.x, this.position.y, 20, 0, 2 * Math.PI);
-        this.canvasStack.layer(3).fill();
+        this.canvasStack.layer("turtle").fillStyle = this.color;
+        this.canvasStack.layer("turtle").beginPath();
+        this.canvasStack.layer("turtle").arc(this.position.x, this.position.y, 20, 0, 2 * Math.PI);
+        this.canvasStack.layer("turtle").fill();
 
         //remove a radius of fog around the turtle
         this.cutoutFog();
@@ -74,12 +84,12 @@ export default class Turtle
      */
     cutoutFog()
     {
-        this.canvasStack.layer(4).beginPath();
-        this.canvasStack.layer(4).save();
-        this.canvasStack.layer(4).arc(this.position.x, this.position.y, 250, 0, 2 * Math.PI);
-        this.canvasStack.layer(4).clip();
-        this.canvasStack.layer(4).clearRect(0, 0, 2000, 2000);
-        this.canvasStack.layer(4).restore();
+        this.canvasStack.layer("fog").beginPath();
+        this.canvasStack.layer("fog").save();
+        this.canvasStack.layer("fog").arc(this.position.x, this.position.y, 250, 0, 2 * Math.PI);
+        this.canvasStack.layer("fog").clip();
+        this.canvasStack.layer("fog").clearRect(0, 0, 2000, 2000);
+        this.canvasStack.layer("fog").restore();
     }
 
     /**
@@ -94,9 +104,9 @@ export default class Turtle
     async north(amount)
     {
         //prepre for drawing
-        this.canvasStack.layer(3).lineWidth = 15;
-        this.canvasStack.layer(3).strokeStyle = this.color;
-        this.canvasStack.layer(3).beginPath();
+        this.canvasStack.layer("turtle").lineWidth = 15;
+        this.canvasStack.layer("turtle").strokeStyle = this.color;
+        this.canvasStack.layer("turtle").beginPath();
         var delta = new Point(0, -1 * this.moveSpeed);
 
         //draw!
@@ -125,9 +135,9 @@ export default class Turtle
     async south(amount)
     {
         //prepre for drawing
-        this.canvasStack.layer(3).lineWidth = 15;
-        this.canvasStack.layer(3).strokeStyle = this.color;
-        this.canvasStack.layer(3).beginPath();
+        this.canvasStack.layer("turtle").lineWidth = 15;
+        this.canvasStack.layer("turtle").strokeStyle = this.color;
+        this.canvasStack.layer("turtle").beginPath();
         var delta = new Point(0, this.moveSpeed);
 
         //draw!
@@ -156,9 +166,9 @@ export default class Turtle
     async east(amount)
     {
         //prepre for drawing
-        this.canvasStack.layer(3).lineWidth = 15;
-        this.canvasStack.layer(3).strokeStyle = this.color;
-        this.canvasStack.layer(3).beginPath();
+        this.canvasStack.layer("turtle").lineWidth = 15;
+        this.canvasStack.layer("turtle").strokeStyle = this.color;
+        this.canvasStack.layer("turtle").beginPath();
         var delta = new Point(this.moveSpeed, 0);
 
         //draw!
@@ -187,9 +197,9 @@ export default class Turtle
     async west(amount)
     {
         //prepre for drawing
-        this.canvasStack.layer(3).lineWidth = 15;
-        this.canvasStack.layer(3).strokeStyle = this.color;
-        this.canvasStack.layer(3).beginPath();
+        this.canvasStack.layer("turtle").lineWidth = 15;
+        this.canvasStack.layer("turtle").strokeStyle = this.color;
+        this.canvasStack.layer("turtle").beginPath();
         var delta = new Point(-1 * this.moveSpeed, 0);
 
         //draw!
